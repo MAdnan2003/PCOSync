@@ -1,13 +1,30 @@
 import axios from "axios";
 
 export default function UserRow({ user, refresh }) {
+  const token = localStorage.getItem("token");
+
   const toggleSuspend = async () => {
-    await axios.patch(`http://localhost:5000/api/users/${user._id}/suspend`);
+    await axios.patch(
+      `http://localhost:5000/api/users/${user._id}/suspend`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
     refresh();
   };
 
   const remove = async () => {
-    await axios.delete(`http://localhost:5000/api/users/${user._id}`);
+    await axios.delete(
+      `http://localhost:5000/api/users/${user._id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
     refresh();
   };
 

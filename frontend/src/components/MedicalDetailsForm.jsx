@@ -23,7 +23,14 @@ const SYMPTOMS_LIST = [
 ];
 
 const EXERCISE_LEVELS = ["Sedentary", "Light", "Moderate", "Intense"];
-const DIET_TYPES = ["Balanced", "Low-carb", "High-protein", "Vegetarian", "Vegan", "Other"];
+const DIET_TYPES = [
+  "Balanced",
+  "Low-carb",
+  "High-protein",
+  "Vegetarian",
+  "Vegan",
+  "Other",
+];
 const STRESS_LEVELS = ["Low", "Medium", "High"];
 const SMOKING_STATUS = ["Non-smoker", "Occasional", "Regular"];
 
@@ -42,10 +49,12 @@ function MedicalDetailsForm() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  // 🔁 Load existing data
+  // 🔁 Load existing medical details
   useEffect(() => {
-    getMyMedicalDetails().then((res) => {
-      if (res?.data) setForm(res.data);
+    getMyMedicalDetails().then(({ status, result }) => {
+      if (status === 200 && result?.data) {
+        setForm(result.data);
+      }
     });
   }, []);
 
@@ -63,108 +72,146 @@ function MedicalDetailsForm() {
     setLoading(true);
     setMessage("");
 
-    try {
-      const res = await createMedicalDetails(form);
-      setMessage(res.message);
-    } catch {
-      setMessage("Something went wrong");
-    } finally {
-      setLoading(false);
+    const { status, result } = await createMedicalDetails(form);
+
+    if (status >= 200 && status < 300) {
+      setMessage("✅ Medical details saved successfully");
+    } else {
+      setMessage(result?.message || "❌ Something went wrong");
     }
+
+    setLoading(false);
   };
 
   return (
-    <div className="card p-4">
-      <h4>Medical Details</h4>
+    <div className="max-w-3xl mx-auto bg-white rounded-lg shadow p-6">
+      <h2 className="text-xl font-semibold mb-4 text-purple-600">
+        Medical Details
+      </h2>
 
-      {message && <div className="alert alert-info">{message}</div>}
+      {message && (
+        <div className="mb-4 p-3 rounded bg-blue-100 text-blue-700">
+          {message}
+        </div>
+      )}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Weight */}
         <input
-          className="form-control mb-2"
           type="number"
           placeholder="Weight (kg)"
+          className="w-full border rounded px-3 py-2"
           value={form.weight}
           onChange={(e) => setForm({ ...form, weight: e.target.value })}
         />
 
+        {/* Height */}
         <input
-          className="form-control mb-2"
           type="number"
           placeholder="Height (cm)"
+          className="w-full border rounded px-3 py-2"
           value={form.height}
           onChange={(e) => setForm({ ...form, height: e.target.value })}
         />
 
+        {/* PCOS Type */}
         <select
-          className="form-select mb-2"
+          className="w-full border rounded px-3 py-2"
           value={form.pcosType}
           onChange={(e) => setForm({ ...form, pcosType: e.target.value })}
         >
           <option value="">Select PCOS Type</option>
           {PCOS_TYPES.map((t) => (
-            <option key={t}>{t}</option>
+            <option key={t} value={t}>
+              {t}
+            </option>
           ))}
         </select>
 
-        <h6>Symptoms</h6>
-        {SYMPTOMS_LIST.map((s) => (
-          <div key={s}>
-            <input
-              type="checkbox"
-              checked={form.symptoms.includes(s)}
-              onChange={() => toggleSymptom(s)}
-            />{" "}
-            {s}
+        {/* Symptoms */}
+        <div>
+          <p className="font-medium mb-2">Symptoms</p>
+          <div className="grid grid-cols-2 gap-2">
+            {SYMPTOMS_LIST.map((s) => (
+              <label key={s} className="flex items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={form.symptoms.includes(s)}
+                  onChange={() => toggleSymptom(s)}
+                />
+                {s}
+              </label>
+            ))}
           </div>
-        ))}
+        </div>
 
+        {/* Exercise Level */}
         <select
-          className="form-select mt-2"
+          className="w-full border rounded px-3 py-2"
           value={form.exerciseLevel}
-          onChange={(e) => setForm({ ...form, exerciseLevel: e.target.value })}
+          onChange={(e) =>
+            setForm({ ...form, exerciseLevel: e.target.value })
+          }
         >
           <option value="">Exercise Level</option>
           {EXERCISE_LEVELS.map((l) => (
-            <option key={l}>{l}</option>
+            <option key={l} value={l}>
+              {l}
+            </option>
           ))}
         </select>
 
+        {/* Diet Type */}
         <select
-          className="form-select mt-2"
+          className="w-full border rounded px-3 py-2"
           value={form.dietType}
           onChange={(e) => setForm({ ...form, dietType: e.target.value })}
         >
           <option value="">Diet Type</option>
           {DIET_TYPES.map((d) => (
-            <option key={d}>{d}</option>
+            <option key={d} value={d}>
+              {d}
+            </option>
           ))}
         </select>
 
+        {/* Stress Level */}
         <select
-          className="form-select mt-2"
+          className="w-full border rounded px-3 py-2"
           value={form.stressLevel}
           onChange={(e) => setForm({ ...form, stressLevel: e.target.value })}
         >
           <option value="">Stress Level</option>
           {STRESS_LEVELS.map((s) => (
-            <option key={s}>{s}</option>
+            <option key={s} value={s}>
+              {s}
+            </option>
           ))}
         </select>
 
+        {/* Smoking Status */}
         <select
-          className="form-select mt-2"
+          className="w-full border rounded px-3 py-2"
           value={form.smokingStatus}
-          onChange={(e) => setForm({ ...form, smokingStatus: e.target.value })}
+          onChange={(e) =>
+            setForm({ ...form, smokingStatus: e.target.value })
+          }
         >
           <option value="">Smoking Status</option>
           {SMOKING_STATUS.map((s) => (
-            <option key={s}>{s}</option>
+            <option key={s} value={s}>
+              {s}
+            </option>
           ))}
         </select>
 
-        <button className="btn btn-primary mt-3" disabled={loading}>
-          {loading ? "Saving..." : "Save"}
+        {/* Submit */}
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition"
+        >
+          {loading ? "Saving..." : "Save Medical Details"}
         </button>
       </form>
     </div>

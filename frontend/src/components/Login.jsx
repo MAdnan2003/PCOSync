@@ -48,6 +48,13 @@ const Login = ({ onLoginSuccess }) => {
           email: formData.email,
           password: formData.password
         });
+
+        // 🚫 BLOCK SUSPENDED USERS (ADDED — NOTHING REMOVED)
+        if (response.data.user.status === "suspended") {
+          setError("Your account has been suspended. Please contact the authorities.");
+          setLoading(false);
+          return;
+        }
         
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));

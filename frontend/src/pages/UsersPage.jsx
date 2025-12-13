@@ -5,10 +5,36 @@ import UserRow from "../components/UserRow";
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
+  const [error, setError] = useState("");
 
   const fetchUsers = async () => {
-    const res = await axios.get(`http://localhost:5000/api/users?search=${search}`);
-    setUsers(res.data);
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setError("Authentication token missing. Please log in again.");
+        return;
+      }
+
+      const res = await axios.get(
+        `http://localhost:5000/api/users?search=${search}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // ✅ REQUIRED
+          },
+        }
+      );
+
+      // Backend may return users directly or wrapped
+      setUsers(res.data.users || res.data);
+      setError("");
+    } catch (err) {
+      console.error("Fetch users error:", err.response?.data || err.message);
+      setError(
+        err.response?.data?.message ||
+          "Failed to load users. Unauthorized or server error."
+      );
+    }
   };
 
   useEffect(() => {
@@ -19,14 +45,26 @@ export default function UsersPage() {
     <div className="min-h-screen p-8 space-y-10 bg-white">
       <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
         User Management
-        </h1>
-      <p className="text-gray-600 mb-8">Manage and monitor all platform users</p>
+      </h1>
+      <p className="text-gray-600 mb-8">
+        Manage and monitor all platform users
+      </p>
+
+      {error && (
+        <div className="bg-red-100 text-red-700 px-4 py-2 rounded-lg">
+          {error}
+        </div>
+      )}
 
       <div className="bg-white p-6 rounded-2xl shadow-lg border border-pink-200/60">
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h2 className="text-2xl font-semibold text-gray-800">All Users</h2>
-            <p className="text-sm text-gray-500">A list of all registered users</p>
+            <h2 className="text-2xl font-semibold text-gray-800">
+              All Users
+            </h2>
+            <p className="text-sm text-gray-500">
+              A list of all registered users
+            </p>
           </div>
 
           <input
@@ -52,9 +90,24 @@ export default function UsersPage() {
             </thead>
 
             <tbody>
-              {users.map((user) => (
-                <UserRow key={user._id} user={user} refresh={fetchUsers} />
-              ))}
+              {users.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan="6"
+                    className="text-center py-6 text-gray-500"
+                  >
+                    No users found
+                  </td>
+                </tr>
+              ) : (
+                users.map((user) => (
+                  <UserRow
+                    key={user._id}
+                    user={user}
+                    refresh={fetchUsers}
+                  />
+                ))
+              )}
             </tbody>
           </table>
         </div>

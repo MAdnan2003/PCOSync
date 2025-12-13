@@ -76,6 +76,13 @@ export const login = async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
+    // ✅ BLOCK SUSPENDED USERS
+    if (user.status === "suspended") {
+      return res.status(403).json({
+        message: "Your account is suspended. Please contact the authorities."
+      });
+    }
+
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
@@ -94,6 +101,7 @@ export const login = async (req, res) => {
         email: user.email,
         name: user.name,
         role: user.role,
+        status: user.status,
         profile: user.profile,
         location: user.location,
         preferences: user.preferences

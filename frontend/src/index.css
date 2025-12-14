@@ -41,3 +41,33 @@ code {
 ::-webkit-scrollbar-track {
   background: #ffe4e6; /* pink-100 */
 }
+
+/* -----------------------------
+   Cycle Tracker variables
+   (safe addition)
+------------------------------ */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+  }
+}
+
+/* -----------------------------
+   Helper styles used by Cycle Tracker
+------------------------------ */
+.glass-card {
+  @apply bg-white/80 backdrop-blur-xl border border-border rounded-2xl shadow-lg;
+}
+
+.gradient-primary {
+  @apply bg-gradient-to-r from-purple-500 to-pink-500;
+}

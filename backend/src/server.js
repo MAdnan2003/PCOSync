@@ -14,6 +14,8 @@ import activityRoutes from "./routes/activityRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import medicalDetailsRoutes from "./routes/medicalDetailsRoutes.js";
+import cycleRoutes from "./routes/cycleRoutes.js";
+import cycleStatsRoutes from "./routes/cycleStatsRoutes.js";
 
 // Services & Models
 import pcosImpactService from "./services/pcosImpactService.js";
@@ -51,6 +53,8 @@ app.use("/api/activity", activityRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/medical-details", medicalDetailsRoutes);
+app.use("/api/cycles", cycleRoutes);
+app.use("/api/cycles/stats", cycleStatsRoutes);
 
 /* =========================
    Health Check
@@ -62,6 +66,8 @@ app.get("/health", (req, res) => {
     timestamp: new Date().toISOString()
   });
 });
+
+
 
 /* =========================
    Environmental Monitoring

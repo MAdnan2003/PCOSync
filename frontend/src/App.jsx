@@ -14,6 +14,9 @@ import AdminDashboard from "./pages/AdminDashboard";
 import UsersPage from "./pages/UsersPage";
 import ReportsPage from "./pages/ReportsPage";
 
+// ✅ ADDED
+import CycleTracker from "./pages/CycleTracker";
+
 export default function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -106,12 +109,22 @@ export default function App() {
                 }
               />
 
-              {/* ✅ MEDICAL DETAILS (USER ONLY) */}
+              {/* MEDICAL DETAILS */}
               <Route
                 path="/medical-details"
                 element={
                   user.role === "user"
                     ? <MedicalDetailsForm />
+                    : <Navigate to="/" replace />
+                }
+              />
+
+              {/* ✅ CYCLE TRACKER (USER ONLY) */}
+              <Route
+                path="/cycle-tracker"
+                element={
+                  user.role === "user"
+                    ? <CycleTracker />
                     : <Navigate to="/" replace />
                 }
               />

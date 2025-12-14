@@ -15,7 +15,13 @@ const CycleTracker = () => {
     new Date().toISOString().split('T')[0]
   );
 
-  const { periodLogs, addPeriodLog, getStats } = useCycleData();
+  const {
+    periodLogs,
+    addPeriodLog,
+    deletePeriodLog,
+    getStats
+  } = useCycleData();
+
   const stats = getStats();
 
   const handleDayClick = (date) => {
@@ -50,7 +56,10 @@ const CycleTracker = () => {
 
           <CycleStats stats={stats} />
 
-          <RecentLogs logs={periodLogs} />
+          <RecentLogs
+            logs={periodLogs}
+            onDelete={deletePeriodLog}
+          />
         </div>
       </div>
 

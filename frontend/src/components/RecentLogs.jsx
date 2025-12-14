@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { Trash2 } from "lucide-react";
 
-export function RecentLogs({ logs }) {
+export function RecentLogs({ logs, onDelete }) {
   const [openId, setOpenId] = useState(null);
 
   if (!logs.length) {
@@ -15,6 +16,14 @@ export function RecentLogs({ logs }) {
     setOpenId(prev => (prev === id ? null : id));
   };
 
+  const handleDelete = (e, id) => {
+    e.stopPropagation(); // ⛔ prevent toggle
+    if (window.confirm("Delete this period log?")) {
+      onDelete(id);
+      setOpenId(null);
+    }
+  };
+
   return (
     <div className="space-y-3">
       {logs.slice(0, 5).map(log => {
@@ -26,7 +35,7 @@ export function RecentLogs({ logs }) {
             onClick={() => toggle(log._id)}
             className="glass-card p-3 text-sm cursor-pointer transition hover:shadow-md"
           >
-            {/* HEADER ROW */}
+            {/* HEADER */}
             <div className="flex justify-between items-center">
               <span className="text-gray-700 font-medium">
                 {log.date}
@@ -36,9 +45,9 @@ export function RecentLogs({ logs }) {
               </span>
             </div>
 
-            {/* EXPANDED CONTENT */}
+            {/* EXPANDED */}
             {isOpen && (
-              <div className="mt-3 space-y-2 text-xs text-gray-600">
+              <div className="mt-3 space-y-3 text-xs text-gray-600">
                 {/* SYMPTOMS */}
                 <div>
                   <span className="font-medium text-gray-700">
@@ -58,6 +67,15 @@ export function RecentLogs({ logs }) {
                     {log.notes}
                   </div>
                 )}
+
+                {/* DELETE */}
+                <button
+                  onClick={(e) => handleDelete(e, log._id)}
+                  className="flex items-center gap-1 text-red-600 hover:text-red-700 text-xs font-medium"
+                >
+                  <Trash2 size={14} />
+                  Delete log
+                </button>
               </div>
             )}
           </div>

@@ -108,11 +108,35 @@ export function useCycleData() {
   };
 
   /* =========================
+     DELETE LOG  ✅ ADDED
+  ========================= */
+  const deletePeriodLog = async (id) => {
+    try {
+      const res = await fetch(`${API_BASE}/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${getToken()}`
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+      fetchLogs();
+      fetchStats();
+    } catch (err) {
+      console.error("Failed to delete period log:", err);
+    }
+  };
+
+  /* =========================
      PUBLIC API
   ========================= */
   return {
     periodLogs,
     addPeriodLog,
+    deletePeriodLog,
     getStats: () => stats
   };
 }

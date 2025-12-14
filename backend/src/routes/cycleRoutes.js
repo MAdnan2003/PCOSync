@@ -50,4 +50,25 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+/* =========================
+   DELETE LOG
+========================= */
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    const deleted = await PeriodLog.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.userId
+    });
+
+    if (!deleted) {
+      return res.status(404).json({ message: "Log not found" });
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Delete period log error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 export default router;

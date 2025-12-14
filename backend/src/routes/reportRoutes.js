@@ -13,9 +13,7 @@ const router = express.Router();
 // Get ALL reports
 router.get("/", getReports);
 
-// =============================
 //     NEW REPORT STATS ROUTE
-// =============================
 router.get("/stats", async (req, res) => {
   try {
     const pending = await Report.countDocuments({ status: "pending" });

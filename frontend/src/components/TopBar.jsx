@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { LogOut, LayoutDashboard, HeartPulse } from "lucide-react";
+import { LogOut, LayoutDashboard, HeartPulse, CalendarDays } from "lucide-react";
 
 const TopBar = ({ user, onLogout }) => {
   const navigate = useNavigate();
@@ -10,6 +10,11 @@ const TopBar = ({ user, onLogout }) => {
 
   const handleMedicalDetails = () => {
     navigate("/medical-details");
+  };
+
+  // ✅ ADDED
+  const handleCycleTracker = () => {
+    navigate("/cycle-tracker");
   };
 
   const handleLogout = () => {
@@ -44,6 +49,15 @@ const TopBar = ({ user, onLogout }) => {
         >
           <HeartPulse size={16} />
           <span>Medical Details</span>
+        </button>
+
+        {/* ✅ CYCLE TRACKER (ADDED) */}
+        <button
+          onClick={handleCycleTracker}
+          className="flex items-center space-x-1 px-3 py-1.5 rounded-md text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700 transition"
+        >
+          <CalendarDays size={16} />
+          <span>Cycle Tracker</span>
         </button>
 
         {/* LOGOUT */}

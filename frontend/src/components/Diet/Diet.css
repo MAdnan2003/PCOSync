@@ -1,0 +1,379 @@
+.diet-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-bottom: 4rem;
+}
+
+/* Shared Header Styles */
+.diet-header-section,
+.page-header {
+    background: linear-gradient(135deg, var(--secondary) 0%, #FDF2F8 100%);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    margin-bottom: 2rem;
+    border: 1px solid #FBCFE8;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.diet-header-section h1,
+.page-header h2 {
+    color: #831843;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.diet-header-section p,
+.page-header p {
+    color: #9D174D;
+    font-size: 1rem;
+}
+
+/* Header Icons */
+.header-icon-wrapper {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.header-icon-wrapper.exercise-theme {
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+}
+
+.header-icon-wrapper.health-theme {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+}
+
+/* Form Styles */
+.diet-form {
+    padding: 2.5rem;
+}
+
+.form-group {
+    margin-bottom: 2.5rem;
+}
+
+.group-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--gray-900);
+    font-size: 1rem;
+}
+
+/* Custom Radio & Checkbox Styles */
+.radio-group-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.radio-card,
+.checkbox-card {
+    display: flex;
+    cursor: pointer;
+    position: relative;
+}
+
+.radio-card input,
+.checkbox-card input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.radio-content,
+.checkbox-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    width: 100%;
+    transition: all 0.2s;
+}
+
+.radio-card:hover .radio-content,
+.checkbox-card:hover .checkbox-content {
+    background-color: var(--gray-50);
+    border-color: var(--gray-300);
+}
+
+.radio-card.selected .radio-content,
+.checkbox-card.selected .checkbox-content {
+    background-color: var(--secondary);
+    border-color: var(--primary);
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.radio-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--gray-300);
+    position: relative;
+}
+
+.radio-card.selected .radio-circle {
+    border-color: var(--primary);
+}
+
+.radio-card.selected .radio-circle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary);
+    border-radius: 50%;
+}
+
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.checkbox-box {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid var(--gray-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.checkbox-box.checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--gray-200);
+}
+
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    border-radius: var(--radius-md);
+}
+
+/* View Styles */
+.plan-header {
+    margin-bottom: 2rem;
+}
+
+.success-banner {
+    background-color: white;
+    border: 1px solid var(--success-bg);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 2rem;
+}
+
+.banner-content h2 {
+    font-size: 1.125rem;
+    color: #065F46;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.banner-content p {
+    color: var(--primary);
+    font-size: 0.95rem;
+}
+
+.week-tabs {
+    display: flex;
+    background: white;
+    padding: 0.5rem;
+    border-radius: var(--radius-lg);
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    box-shadow: var(--shadow-sm);
+}
+
+.week-tab {
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-md);
+    color: var(--gray-600);
+    font-weight: 500;
+    min-width: 80px;
+}
+
+.week-tab:hover {
+    background-color: var(--gray-50);
+}
+
+.week-tab.active {
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+.day-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.day-header h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.day-meta {
+    color: var(--gray-500);
+    font-size: 0.875rem;
+}
+
+.meals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.meal-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid transparent;
+}
+
+.meal-card:hover {
+    border-color: var(--secondary);
+    box-shadow: var(--shadow-md);
+}
+
+.meal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.meal-type {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.meal-title {
+    font-size: 1.125rem;
+    color: var(--gray-900);
+    font-weight: 600;
+}
+
+.meal-badges {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.badge.low-gi {
+    background-color: var(--success-bg);
+    color: #065F46;
+}
+
+.badge.calories {
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+.ingredients-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.ingredient-pill {
+    padding: 0.25rem 0.75rem;
+    background-color: var(--gray-100);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    color: var(--gray-700);
+    border: 1px solid var(--gray-200);
+}
+
+.benefits {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gray-100);
+}
+
+.benefits h4 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+.benefits ul {
+    list-style: none;
+}
+
+.benefits li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    margin-bottom: 0.25rem;
+}
+
+.benefits li svg {
+    color: var(--success);
+}
+
+/* Compact Header for View pages */
+.page-header.compact {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.page-header.compact h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}

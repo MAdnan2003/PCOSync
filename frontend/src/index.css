@@ -1,0 +1,410 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -----------------------------
+   GLOBAL BASE STYLES (TAILWIND)
+------------------------------ */
+
+body {
+  @apply bg-gray-50 text-gray-800;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+* {
+  @apply box-border;
+}
+
+/* Code blocks */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas,
+    'Courier New', monospace;
+}
+
+/* -----------------------------
+   SCROLLBAR STYLING
+------------------------------ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f472b6;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffe4e6;
+}
+
+/* -----------------------------
+   ROOT (FIRST SET)
+------------------------------ */
+
+:root {
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+  --text-dark: #1f2937;
+  --border-radius: 12px;
+}
+
+/* -----------------------------
+   GOOGLE FONT + SECOND THEME
+------------------------------ */
+
+
+
+/* -----------------------------
+   ROOT (SECOND SET — PRESERVED)
+------------------------------ */
+
+:root {
+  --primary-gradient: linear-gradient(90deg, #d846b4 0%, #a246d8 100%);
+  --primary-purple: #a246d8;
+  --primary-pink: #d846b4;
+  --secondary-purple: #f3e8ff;
+  --bg-color: #fcfaff;
+  --card-bg: #ffffff;
+  --text-dark: #1a1a1a;
+  --text-muted: #666666;
+  --border-radius: 16px;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 30px rgba(162, 70, 216, 0.08);
+  --transition: all 0.3s ease;
+}
+
+/* -----------------------------
+   GLOBAL OVERRIDE BODY (PRESERVED)
+------------------------------ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* -----------------------------
+   CARD + BUTTON SYSTEM
+------------------------------ */
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(162, 70, 216, 0.05);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(162, 70, 216, 0.12);
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'Outfit', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+.btn-primary:hover {
+  opacity: 0.95;
+  box-shadow: 0 4px 15px rgba(216, 70, 180, 0.3);
+}
+
+.btn-secondary {
+  background: var(--secondary-purple);
+  color: var(--primary-purple);
+}
+
+/* -----------------------------
+   BADGES
+------------------------------ */
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-low {
+  background: #f0f0f0;
+  color: #1a1a1a;
+  border: 1px solid #ddd;
+}
+
+.badge-purple {
+  background: var(--secondary-purple);
+  color: var(--primary-purple);
+}
+
+/* -----------------------------
+   LAYOUT HELPERS
+------------------------------ */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 0;
+  font-weight: 600;
+}
+
+.text-muted {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+@layer base {
+  :root {
+    --background: 30 30% 98%;
+    --foreground: 340 20% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 340 20% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 340 20% 15%;
+
+    --primary: 340 65% 47%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 30 40% 94%;
+    --secondary-foreground: 340 20% 15%;
+
+    --muted: 30 20% 92%;
+    --muted-foreground: 340 10% 45%;
+
+    --accent: 340 30% 95%;
+    --accent-foreground: 340 65% 47%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 30 20% 88%;
+    --input: 30 20% 88%;
+    --ring: 340 65% 47%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 340 65% 47%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 340 30% 95%;
+    --sidebar-accent-foreground: 340 65% 47%;
+    --sidebar-border: 30 20% 88%;
+    --sidebar-ring: 340 65% 47%;
+  }
+
+  .dark {
+    --background: 340 20% 8%;
+    --foreground: 30 30% 95%;
+
+    --card: 340 20% 12%;
+    --card-foreground: 30 30% 95%;
+
+    --popover: 340 20% 12%;
+    --popover-foreground: 30 30% 95%;
+
+    --primary: 340 65% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 340 20% 18%;
+    --secondary-foreground: 30 30% 95%;
+
+    --muted: 340 20% 18%;
+    --muted-foreground: 30 15% 60%;
+
+    --accent: 340 25% 20%;
+    --accent-foreground: 340 65% 70%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 340 20% 20%;
+    --input: 340 20% 20%;
+    --ring: 340 65% 55%;
+    --sidebar-background: 340 20% 10%;
+    --sidebar-foreground: 30 30% 90%;
+    --sidebar-primary: 340 65% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 340 25% 18%;
+    --sidebar-accent-foreground: 30 30% 90%;
+    --sidebar-border: 340 20% 20%;
+    --sidebar-ring: 340 65% 55%;
+  }
+}
+
+@layer utilities {
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'DM Sans', sans-serif;
+  }
+  
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', serif;
+  }
+}
+
+:root {
+  /* Brand Colors */
+  --primary: #D02F80;
+  --primary-hover: #be2570;
+  --secondary: #FCE7F3;
+  --accent: #8B5CF6;
+  
+  /* Functional Colors */
+  --success: #10B981;
+  --success-bg: #D1FAE5;
+  --warning: #F59E0B;
+  --warning-bg: #FEF3C7;
+  --error: #EF4444;
+  --error-bg: #FEE2E2;
+  --info: #3B82F6;
+  
+  /* Neutral Colors */
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-800: #1F2937;
+  --gray-900: #111827;
+  
+  /* UI Tokens */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--gray-50);
+  color: var(--gray-800);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--gray-900);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: all 0.2s;
+  border: none;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background-color: white;
+  border: 1px solid var(--gray-200);
+  color: var(--gray-700);
+}
+
+.btn-outline:hover {
+  border-color: var(--gray-300);
+  background-color: var(--gray-50);
+}
+
+.card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s, box-shadow 0.2s;
+}

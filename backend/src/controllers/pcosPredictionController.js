@@ -3,7 +3,7 @@ import axios from "axios";
 export const predictPCOS = async (req, res) => {
   try {
     const response = await axios.post(
-      "http://localhost:8000/predict",
+      `${process.env.ML_URL}/predict`,
       req.body
     );
 
